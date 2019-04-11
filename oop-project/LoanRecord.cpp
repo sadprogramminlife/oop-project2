@@ -1,7 +1,20 @@
 #include "LoanRecord.h"
 
-LoanRecord::LoanRecord(std::string equipId, std::string userId, std::string userName, std::string equipName)
+std::string LoanRecord::newDate(int day = 0)
 {
+	// missing date
+
+	return std::string();
+}
+
+LoanRecord::LoanRecord()
+{
+}
+
+LoanRecord::LoanRecord(std::string loanDate, std::string returnDate, std::string equipId, std::string userId, std::string userName, std::string equipName)
+{
+	this->loanDate = loanDate;
+	this->returnDate = returnDate;
 	this->equipId = equipId;
 	this->userId = userId;
 	this->userName = userName;
@@ -20,22 +33,22 @@ std::string LoanRecord::getReturnedDate() const
  
 std::string LoanRecord::getEquipId() const
 {
-	this->equipId;
+	return this->equipId;
 }
 
 std::string LoanRecord::getUserId() const
 {
-	this->userId;
+	return this->userId;
 }
 
-std::string LoanRecord::getUserName() const
+std::string LoanRecord::getUserName() 
 {
-	this->userName;
+	return this->userName;
 }
 
 std::string LoanRecord::getEquipName() const
 {
-	this->equipName;
+	return this->equipName;
 }
 
 std::string LoanRecord::getStatus() const
@@ -51,4 +64,11 @@ bool LoanRecord::getBoolStatus() const
 std::string LoanRecord::getLoanRecord() const
 {
 	return std::string(this->loanDate + '|' + this->returnDate + '|' + this->equipId + '|' + this->userId + '|' + this->userName + '|' + this->equipName);
+}
+
+LoanRecord LoanRecord::returnEquipment() const
+{
+	LoanRecord tmp = *this;
+	tmp.status = true;
+	return tmp;
 }

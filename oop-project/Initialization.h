@@ -22,16 +22,21 @@ private:
 
 protected:
 
-	Initialization();
-	Initialization(std::string username, std::string password, bool isAdmin, bool isSuccess);
-
 	void insertUser(std::string path = "user.txt");
 	void insertEquip(std::string path = "camp_equipment.txt");
 	void insertRecord(std::string path = "loan_record.txt");
 
 public:
-	std::vector<User> getUsers() const;
-	std::vector<Equipment> getEquiment() const;
+
+	Initialization();
+	Initialization(std::string username, std::string password, bool &isAdmin, bool &isSuccess);
+
+	~Initialization();
+
+	User *getUser() const;
+	std::vector<Tent> getTents() const;
+	std::vector<Stove> getStoves() const;
+	std::vector<Lantern> getLanterns() const;
 	std::vector<LoanRecord> getLoanRecord() const; 
 
 };

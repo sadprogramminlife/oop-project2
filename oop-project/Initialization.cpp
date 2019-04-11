@@ -11,7 +11,7 @@ Initialization::~Initialization()
 {
 }
 
-Initialization::Initialization(std::string username, std::string password, bool isAdmin, bool isUser)
+Initialization::Initialization(std::string username, std::string password, bool &isAdmin, bool &isUser)
 {
 	insertUser();
 
@@ -19,15 +19,18 @@ Initialization::Initialization(std::string username, std::string password, bool 
 	isUser = false;
 
 	if ( username.compare("admin") || password.compare("admin") ) {			// return 1 if user is not admin
-		this->index_of_user = -1;
-		isAdmin = true;
-	}
-	else {
 		for (int i = 0; i < users.size(); i++) {
-			if (username.compare(users[0]->getId) || password.compare(users[0]->getDob)) {
+			if (!username.compare((this->users)[i]->getId()) && !password.compare((this->users)[i]->getDob())) {
 				isUser = true;
+				this->index_of_user = i;
+
+				break;
 			}
 		}
+	}
+	else {
+		this->index_of_user = -1;
+		isAdmin = true;
 	}
 
 	if (isAdmin ^ isUser) {
@@ -45,8 +48,10 @@ void Initialization::insertUser(std::string path)
 		string id, name, section, date, address, rank;
 		stringstream ss(line);
 
-		if (ss.peek() != '\n')
+		
+		if ((ss.rdbuf()->in_avail()))
 		{
+			int integer = ss.peek();
 			getline(ss, id, '|');
 			getline(ss, name, '|');
 			getline(ss, section, '|');
@@ -94,6 +99,7 @@ void Initialization::insertEquip(std::string path)
 		getline(ssline, dateOfPurchase, '|');
 		getline(ssline, condition, '|');
 		getline(ssline, status, '|');
+
 		if (itemID.substr(0, 1) == "T")
 		{
 			string tentSize, tentType, numberOfDoors, isDoubleLayer, colour;
@@ -105,26 +111,24 @@ void Initialization::insertEquip(std::string path)
 			this->tents.push_back(Tent(itemID, itemName, brand, itemType, dateOfPurchase, condition, status, tentSize, tentType, numberOfDoors, isDoubleLayer, colour));
 
 		}
-		else
+		else if (itemID.substr(0, 1)[0] == 'L')
 		{
-			if (itemID.substr(0, 1)[0] == 'L')
-			{
-				string fuelType;
-				string lanternType;
-				string lanternSize;
-				getline(ssline, fuelType, '|');
-				getline(ssline, lanternType, '|');
-				getline(ssline, lanternSize, '|');
-				this->lanterns.push_back(Lantern(itemID, itemName, brand, itemType, dateOfPurchase, condition, status, fuelType, lanternType, lanternSize));
-			}
-			else
-			{
-				string fuelType;
-				string stoveType;
-				getline(ssline, fuelType, '|');
-				getline(ssline, stoveType, '|');
-				this->stoves.push_back(Stove(itemID, itemName, brand, itemType, dateOfPurchase, condition, status, fuelType, stoveType));
-			}
+			string fuelType;
+			string lanternType;
+			string lanternSize;
+			getline(ssline, fuelType, '|');
+			getline(ssline, lanternType, '|');
+			getline(ssline, lanternSize, '|');
+			this->lanterns.push_back(Lantern(itemID, itemName, brand, itemType, dateOfPurchase, condition, status, fuelType, lanternType, lanternSize));
+		}
+		else if (itemID.substr(0, 1)[0] == 'S')
+		{
+			string fuelType;
+			string stoveType;
+			getline(ssline, fuelType, '|');
+			getline(ssline, stoveType, '|');
+			this->stoves.push_back(Stove(itemID, itemName, brand, itemType, dateOfPurchase, condition, status, fuelType, stoveType));
+
 		}
 	}
 }
@@ -133,3 +137,29 @@ void Initialization::insertRecord(std::string path)
 {
 
 }
+
+User * Initialization::getUser() const
+{
+	return this->users[this->index_of_user];
+}
+
+std::vector<Tent> Initialization::getTents() const
+{
+	return tents;
+}
+
+std::vector<Stove> Initialization::getStoves() const
+{
+	return this->stoves;
+}
+
+std::vector<Lantern> Initialization::getLanterns() const
+{
+	return this->lanterns;
+}
+
+std::vector<LoanRecord> Initialization::getLoanRecord() const
+{
+	return this->records;
+}
+
