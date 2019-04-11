@@ -63,7 +63,7 @@ bool LoanRecord::getBoolStatus() const
 
 std::string LoanRecord::getLoanRecord() const
 {
-	return std::string(this->loanDate + '|' + this->returnDate + '|' + this->equipId + '|' + this->userId + '|' + this->userName + '|' + this->equipName);
+	return std::string(this->loanDate + '|' + this->returnDate + '|' + this->equipId + '|' + this->userId + '|' + this->userName + '|' + this->equipName + '\n');
 }
 
 LoanRecord LoanRecord::returnEquipment() const
