@@ -3,6 +3,7 @@
 #define INITIALIZATION_H
 
 #include <vector>
+#include <iostream>		// delete after the debug
 #include "User.h"
 #include "Equipment.h"
 #include "LoanRecord.h"

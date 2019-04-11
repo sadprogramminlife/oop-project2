@@ -9,6 +9,10 @@ Initialization::Initialization()
 
 Initialization::~Initialization()
 {
+	// delete objects
+	for (int i = 0; i < users.size(); i++) {
+		delete users[i];
+	}
 }
 
 Initialization::Initialization(std::string username, std::string password, bool &isAdmin, bool &isUser)
@@ -180,4 +184,6 @@ std::vector<LoanRecord> Initialization::getLoanRecord() const
 {
 	return this->records;
 }
+
+
 
