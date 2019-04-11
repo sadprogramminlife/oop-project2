@@ -51,7 +51,6 @@ void Initialization::insertUser(std::string path)
 		
 		if ((ss.rdbuf()->in_avail()))
 		{
-			int integer = ss.peek();
 			getline(ss, id, '|');
 			getline(ss, name, '|');
 			getline(ss, section, '|');
@@ -135,7 +134,26 @@ void Initialization::insertEquip(std::string path)
 
 void Initialization::insertRecord(std::string path)
 {
+	stringstream list = (stringstream)fileRead(path);
+	string line;
+	while (list && getline(list, line))
+	{
+		string loanDate, returnDate, equipId, userId, userName, equipName;
+		stringstream ss(line);
 
+
+		if ((ss.rdbuf()->in_avail()))
+		{
+			getline(ss, loanDate, '|');
+			getline(ss, returnDate, '|');
+			getline(ss, equipId, '|');
+			getline(ss, userId, '|');
+			getline(ss, userName, '|');
+			getline(ss, equipName, '|');
+
+			this->records.push_back(LoanRecord(loanDate, returnDate, equipId, userId, userName, equipName));
+		}
+	}
 }
 
 User * Initialization::getUser() const

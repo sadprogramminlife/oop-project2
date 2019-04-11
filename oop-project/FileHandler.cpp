@@ -9,7 +9,7 @@ string fileRead(string path) {
 		return ss.str();
 	}
 
-	return NULL;
+	return string("");
 }
 
 void fileWrite(string path, string str) {
