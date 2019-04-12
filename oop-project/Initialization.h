@@ -26,6 +26,7 @@ protected:
 	void insertUser(std::string path = "user.txt");
 	void insertEquip(std::string path = "camp_equipment.txt");
 	void insertRecord(std::string path = "loan_record.txt");
+	void addRecord(const LoanRecord &r);
 
 public:
 

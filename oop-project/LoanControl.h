@@ -3,18 +3,28 @@
 #define LOANCONTROL_H
 
 #include "Initialization.h"
-#include <type_traits>
 
 class LoanControl : public Initialization
 {
 public:
-	vector<LoanRecord> getUserLoanRecords();
 
-	template <class E> 
-	vector<E> getAvailableEquipments();
+	LoanControl();
+	vector<LoanRecord> getUserLoanRecords() const;
 
-	bool performBorrowEquipment(string equipId);
-	bool performReturnEquipment(string equipId);
+	template <class E>
+	E filter(E tmp) const;
+
+	vector<Tent>  getAvailableTents() const;
+	vector<Stove> getAvailableStoves() const;
+	vector<Lantern> getAvailableLanterns() const;
+
+	bool performBorrowEquipment(string equipId, vector<Tent> &equipment);
+	bool performBorrowEquipment(string equipId, vector<Stove> &equipment);
+	bool performBorrowEquipment(string equipId, vector<Lantern> &equipment);
+
+	bool performReturnEquipment(string equipId, vector<Tent> &equipment);
+	bool performReturnEquipment(string equipId, vector<Stove> &equipment);
+	bool performReturnEquipment(string equipId, vector<Lantern> &equipment);
 
 };
 

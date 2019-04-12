@@ -1,23 +1,168 @@
 #include "LoanControl.h"
 
-template<typename E>
-vector<E> LoanControl::getAvailableEquipments()
+vector<Tent> LoanControl::getAvailableTents() const
 {
-	vector<E> res;
-	if (std::is_same<E, Tent>) {
-		vector<E> tmp = tents;
-	}
-	else if (std::is_same<E, Stove>) {
-		vector<E> tmp = stoves;
-	}
-	else if (std::is_same<E, Lantern>) {
-		vector<E> tmp = lanterns;
+	vector<Tent> tmp = this->getTents();
+	return filter(tmp);
+}
+
+vector<Stove> LoanControl::getAvailableStoves() const
+{
+	vector<Stove> tmp = this->getStoves();
+	return filter(tmp);
+}
+
+vector<Lantern> LoanControl::getAvailableLanterns() const
+{
+	vector<Lantern> tmp = this->getLanterns();
+	return filter(tmp);
+}
+
+LoanControl::LoanControl()
+{
+	this->getUserLoanRecords();
+}
+
+vector<LoanRecord> LoanControl::getUserLoanRecords() const
+{
+	int size = (this->getLoanRecord()).size();
+	vector<LoanRecord> *r = &(this->getLoanRecord());
+	vector<LoanRecord> res;
+
+	for (int i = 0; i < size; i++) {
+		bool flag = true;
+		LoanRecord *ptr = &(*r)[i];
+		if (ptr->getBoolStatus()
+			&& ptr->getUserId().compare(this->getUser()->getId())) {
+			for (int j = i; flag && j < size; j++) {
+				if (ptr->getUserId().compare(this->getUser()->getId())
+					&& !ptr->getBoolStatus()) {
+					flag = false;
+				}
+			}
+		}
+
+		if (!flag) {
+			res.push_back(*ptr);
+			this->getUser()->borrowItem(ptr->getEquipId());
+		}
 	}
 
+	return res;
+}
+
+template<class E>
+E LoanControl::filter(E tmp) const
+{
+	E res;
 	for (int i = 0; i < tmp.size(); i++) {
 		if (tmp[i].canBorrow())
 			res.push_back(tmp[i]);
 	}
 
 	return res;
+}
+
+bool LoanControl::performBorrowEquipment(string equipId, vector<Tent> &equipment)
+{
+	bool flag = false;
+	if (this->getUser()->canLoan()) {
+
+		for (int i = 0; i < equipment.size(); i++) {
+			if (!equipment[i].getItemID().compare(equipId)) {
+				if (this->getUser()->borrowItem(equipId)) {
+					flag = true;
+				}
+				else {
+					break;
+				}
+			}
+		}
+	}
+
+	return flag;
+}
+bool LoanControl::performBorrowEquipment(string equipId, vector<Stove> &equipment)
+{
+	bool flag = false;
+	if (this->getUser()->canLoan()) {
+
+		for (int i = 0; i < equipment.size(); i++) {
+			if (!equipment[i].getItemID().compare(equipId)) {
+				if (this->getUser()->borrowItem(equipId)) {
+					flag = true;
+				}
+				else {
+					break;
+				}
+			}
+		}
+	}
+
+	return flag;
+}
+bool LoanControl::performBorrowEquipment(string equipId, vector<Lantern> &equipment)
+{
+	bool flag = false;
+	if (this->getUser()->canLoan()) {
+
+		for (int i = 0; i < equipment.size(); i++) {
+			if (!equipment[i].getItemID().compare(equipId)) {
+				if (this->getUser()->borrowItem(equipId)) {
+					flag = true;
+				}
+				else {
+					break;
+				}
+			}
+		}
+	}
+
+	return flag;
+}
+
+bool LoanControl::performReturnEquipment(string equipId, vector<Tent>& equipment)
+{
+	bool flag = false;
+	for (int i = 0; !flag && i < equipment.size(); i++) {
+		if (equipId.compare(equipment[i].getItemID())) {
+			User *user = this->getUser();
+			if (this->getUser()->returnItem(equipId)) {
+				addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(), equipment[i].getItemID(), equipment[i].getItemName()));
+				flag = true;
+			}
+		}
+	}
+
+	return flag;
+}
+bool LoanControl::performReturnEquipment(string equipId, vector<Stove>& equipment)
+{
+	bool flag = false;
+	for (int i = 0; !flag && i < equipment.size(); i++) {
+		if (equipId.compare(equipment[i].getItemID())) {
+			User *user = this->getUser();
+			if (this->getUser()->returnItem(equipId)) {
+				addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(), equipment[i].getItemID(), equipment[i].getItemName()));
+				flag = true;
+			}
+		}
+	}
+
+	return flag;
+}
+bool LoanControl::performReturnEquipment(string equipId, vector<Lantern>& equipment)
+{
+	bool flag = false;
+	for (int i = 0; !flag && i < equipment.size(); i++) {
+		if (equipId.compare(equipment[i].getItemID())) {
+			User *user = this->getUser();
+			if (this->getUser()->returnItem(equipId)) {
+				addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(), equipment[i].getItemID(), equipment[i].getItemName()));
+				flag = true;
+			}
+		}
+	}
+
+	return flag;
 }

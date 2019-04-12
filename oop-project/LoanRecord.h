@@ -21,7 +21,7 @@ private:
 
 public:
 	LoanRecord();
-	LoanRecord(std::string loanDate, std::string returnDate, std::string equipId, std::string userId, std::string userName, std::string equipName);
+	LoanRecord(std::string equipId, std::string userId, std::string userName, std::string equipName);
 
 	std::string getLoanDate() const;
 	std::string getReturnedDate() const;

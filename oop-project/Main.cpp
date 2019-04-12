@@ -2,15 +2,25 @@
 #include <string>
 #include <vector>
 #include "Initialization.h"
-
-using namespace std;
+#include "LoanControl.h"
+#include "User.h"
+#include "Equipment.h"
 
 int main() {
 	bool isAdmin, isUser;
-	std::string a = "VEN001";
-	std::string b = "13041990";
+	std::string a = "SCM002";
+	std::string b = "02111987";
 	Initialization i(a, b, isAdmin, isUser);
 	i.getLanterns();
 
+	LoanControl *l = static_cast<LoanControl*>(&i);
 
+	for (int i = 0; i < l->getAvailableLanterns().size(); i++)
+		cout << l->getAvailableLanterns()[i].getEquipmentInfo();
+
+	std::string str = "T001";
+	vector<Tent> items = l->getAvailableTents();
+	l->performBorrowEquipment(str, items);
+
+	return 0;
 }

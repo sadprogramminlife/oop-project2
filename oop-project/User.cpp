@@ -76,6 +76,11 @@ bool User::returnItem(string itemId)
 	return false;
 }
 
+bool User::canLoan()
+{
+	return (borrowlimit-borrownum);
+}
+
 /*
 */
 

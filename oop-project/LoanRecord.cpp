@@ -11,10 +11,10 @@ LoanRecord::LoanRecord()
 {
 }
 
-LoanRecord::LoanRecord(std::string loanDate, std::string returnDate, std::string equipId, std::string userId, std::string userName, std::string equipName)
+LoanRecord::LoanRecord(std::string equipId, std::string userId, std::string userName, std::string equipName)
 {
-	this->loanDate = loanDate;
-	this->returnDate = returnDate;
+	this->loanDate = "";		// change this later
+	this->returnDate = "";			// change this later
 	this->equipId = equipId;
 	this->userId = userId;
 	this->userName = userName;
@@ -63,7 +63,7 @@ bool LoanRecord::getBoolStatus() const
 
 std::string LoanRecord::getLoanRecord() const
 {
-	return std::string(this->loanDate + '|' + this->returnDate + '|' + this->equipId + '|' + this->userId + '|' + this->userName + '|' + this->equipName + '\n');
+	return std::string(this->loanDate + '|' + this->returnDate + '|' + this->userId + '|' + this->userName + '|' + this->equipId + '|' + this->equipName + '\n');
 }
 
 LoanRecord LoanRecord::returnEquipment() const

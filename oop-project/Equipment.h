@@ -21,6 +21,7 @@ public:
 	string getStatus();
 	string getEquipment();
 	virtual string getEquipmentInfo()=0;
+
 	void setCondition(const string & condition);
 	void setStatus(const string & status);
 	bool canBorrow();

@@ -160,9 +160,26 @@ void Initialization::insertRecord(std::string path)
 	}
 }
 
+void Initialization::addRecord(const LoanRecord & r)
+{
+	(this->records).push_back(r);
+
+	string res;
+	for (int i = 0; i < records.size(); i++) {
+		res += records[i].getLoanRecord();
+	}
+
+	fileWrite("loan_record.txt", res);
+}
+
 User * Initialization::getUser() const
 {
-	return this->users[this->index_of_user];
+	User *ptr = NULL;
+
+	if (this->index_of_user != 0)
+		ptr = this->users[this->index_of_user];
+
+	return ptr;
 }
 
 std::vector<Tent> Initialization::getTents() const
