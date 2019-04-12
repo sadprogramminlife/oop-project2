@@ -30,21 +30,25 @@ vector<LoanRecord> LoanControl::getUserLoanRecords() const
 	vector<LoanRecord> res;
 
 	for (int i = 0; i < size; i++) {
-		bool flag = true;
-		LoanRecord *ptr = &(*r)[i];
-		if (ptr->getBoolStatus()
-			&& ptr->getUserId().compare(this->getUser()->getId())) {
-			for (int j = i; flag && j < size; j++) {
-				if (ptr->getUserId().compare(this->getUser()->getId())
-					&& !ptr->getBoolStatus()) {
+
+		LoanRecord r = this->getLoanRecord()[i];
+		if (!r.getBoolStatus() && !r.getUserId().compare(this->getUser()->getId())) {
+			bool flag = true;
+			string match_eid = r.getEquipId();
+
+			for (int j = i+1; flag && j < size; j++) {
+				bool checkName = !this->getLoanRecord()[j].getUserId().compare(getUser()->getId());
+				bool checkEID = !this->getLoanRecord()[j].getEquipId().compare(match_eid);
+				bool checkStatus = this->getLoanRecord()[j].getBoolStatus();
+				if (checkName && checkEID && checkStatus) {
 					flag = false;
 				}
 			}
-		}
 
-		if (!flag) {
-			res.push_back(*ptr);
-			this->getUser()->borrowItem(ptr->getEquipId());
+			if (flag) {
+				res.push_back(r);
+				this->getUser()->borrowItem(r.getEquipId());
+			}
 		}
 	}
 
@@ -70,11 +74,11 @@ bool LoanControl::performBorrowEquipment(string equipId, vector<Tent> &equipment
 
 		for (int i = 0; i < equipment.size(); i++) {
 			if (!equipment[i].getItemID().compare(equipId)) {
-				if (this->getUser()->borrowItem(equipId)) {
-					equipment[i].setStatus("out");
+				if (equipment[i].canBorrow() && this->getUser()->borrowItem(equipId)) {
+					tents[i].setStatus("out");
 
 					updateEquipment();
-					addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(), 
+					addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(),
 						equipment[i].getItemID(), equipment[i].getItemName()));
 
 					flag = true;
@@ -95,8 +99,8 @@ bool LoanControl::performBorrowEquipment(string equipId, vector<Stove> &equipmen
 
 		for (int i = 0; i < equipment.size(); i++) {
 			if (!equipment[i].getItemID().compare(equipId)) {
-				if (this->getUser()->borrowItem(equipId)) {
-					equipment[i].setStatus("out");
+				if (equipment[i].canBorrow() && this->getUser()->borrowItem(equipId)) {
+					stoves[i].setStatus("out");
 
 					updateEquipment();
 					addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(),
@@ -120,8 +124,8 @@ bool LoanControl::performBorrowEquipment(string equipId, vector<Lantern> &equipm
 
 		for (int i = 0; i < equipment.size(); i++) {
 			if (!equipment[i].getItemID().compare(equipId)) {
-				if (this->getUser()->borrowItem(equipId)) {
-					equipment[i].setStatus("out");
+				if (equipment[i].canBorrow() && this->getUser()->borrowItem(equipId)) {
+					lanterns[i].setStatus("out");
 
 					updateEquipment();
 					addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(),

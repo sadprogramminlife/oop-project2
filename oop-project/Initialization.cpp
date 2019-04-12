@@ -67,6 +67,7 @@ void Initialization::insertUser(std::string path)
 {
 	stringstream ac = (stringstream)fileRead(path);
 	string line;
+
 	while (getline(ac, line))
 	{
 		string id, name, section, date, address, rank;
@@ -88,22 +89,24 @@ void Initialization::insertUser(std::string path)
 
 			if (id.substr(0, 3) == "VEN")
 			{
-				this->users.push_back(new VentureScout(id, name, date, section, address));
+				this->users.push_back(new VentureScout(id, name, section, date, address));
 			}
 			else if (id.substr(0, 3) == "ROV")
 			{
-				this->users.push_back(new RoverScout(id, name, date, section, address));
+				this->users.push_back(new RoverScout(id, name, section, date, address));
 			}
 			else if (id.substr(0, 3) == "SCT")
 			{
-				this->users.push_back(new Scout(id, name, date, section, address, rank));
+				this->users.push_back(new Scout(id, name, section, date, address, rank));
 			}
 			else if (id.substr(0, 3) == "SCM")
 			{
-				this->users.push_back(new Scouter(id, name, date, section, address, rank));
+				this->users.push_back(new Scouter(id, name, section, date, address, rank));
 			}
 		}
 	}
+
+	updateUser();
 }
 
 void Initialization::insertEquip(std::string path)
@@ -154,6 +157,8 @@ void Initialization::insertEquip(std::string path)
 
 		}
 	}
+
+	updateEquipment();
 }
 
 void Initialization::insertRecord(std::string path)
@@ -162,7 +167,7 @@ void Initialization::insertRecord(std::string path)
 	string line;
 	while (list && getline(list, line))
 	{
-		string loanDate, returnDate, equipId, userId, userName, equipName;
+		string loanDate, returnDate, equipId, userId, userName, equipName, status;
 		stringstream ss(line);
 
 
@@ -174,10 +179,12 @@ void Initialization::insertRecord(std::string path)
 			getline(ss, userName, '|');
 			getline(ss, equipId, '|');
 			getline(ss, equipName, '|');
+			getline(ss, status, '|');
 
-			this->records.push_back(LoanRecord(loanDate, returnDate, userId, userName, equipId, equipName));
+			this->records.push_back(LoanRecord(loanDate, returnDate, userId, userName, equipId, equipName, status));
 		}
 	}
+
 }
 
 void Initialization::addRecord(const LoanRecord & r)
@@ -196,7 +203,7 @@ User * Initialization::getUser() const
 {
 	User *ptr = NULL;
 
-	if (this->index_of_user != 0)
+	if (this->index_of_user >= 0)
 		ptr = this->users[this->index_of_user];
 
 	return ptr;
@@ -237,15 +244,16 @@ void Initialization::updateEquipment()
 		s += lanterns[i].getInfo();
 	}
 
-
+	fileWrite("camp_equipment.txt", s);
 }
 
-template<class T>
-void Initialization::addString(const string & s, vector<T> &t)
+void Initialization::updateUser()
 {
-	for (int i = 0; i < t.size(); i++) {
-		s += t[i].getInfo();
-	}
+	string s = "";
+	for (int i = 0; i < users.size(); i++)
+		s += users[i]->getInfo();
+
+	fileWrite("user.txt", s);
 }
 
 

@@ -28,9 +28,6 @@ protected:
 	void insertRecord(std::string path = "loan_record.txt");
 	void addRecord(const LoanRecord &r);
 
-	template <class T>
-	void addString(const string &s, vector<T> &t);
-
 public:
 
 	Initialization();

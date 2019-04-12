@@ -1,11 +1,11 @@
 #include "User.h"
 
-User::User(string id, string name, string date, string section, string address)
+User::User(string id, string name, string section, string date, string address)
 {
 	this->id = id;
 	this->name = name;
-	this->date = date;
 	this->section = section;
+	this->date = date;
 	this->address = address;
 
 	this->borrownum = 0;
@@ -42,7 +42,7 @@ string User::getAddress() const
 
 string User::getUser() const
 {
-	return string(this->id + '|' + this->name + '|' + this->date + '|' + this->section + '|' + this->address);
+	return string(this->id + '|' + this->name + '|' + this->section + '|' + this->date + '|' + this->address);
 }
 
 string User::getInfo() const
@@ -115,8 +115,8 @@ string Scout::getInfo() const
 	return string(getUser() + '|' + this->rank + '\n');
 }
 
-Scout::Scout(string id, string name, string date, string section, string address, string rank)
-	: User::User(id, name, date, section, address)
+Scout::Scout(string id, string name, string section, string date, string address, string rank)
+	: User::User(id, name, section, date, address)
 {
 	this->rank = rank;
 	this->setItemLimit();
@@ -135,8 +135,8 @@ string VentureScout::getInfo() const
 	return string(getUser() + '\n');
 }
 
-VentureScout::VentureScout(string id, string name, string date, string section, string address)
-	: User::User(id, name, date, section, address)
+VentureScout::VentureScout(string id, string name, string section, string date, string address)
+	: User::User(id, name, section, date, address)
 {
 	this->setItemLimit();
 }
@@ -154,8 +154,8 @@ string RoverScout::getInfo() const
 	return string(getUser() + '\n');
 }
 
-RoverScout::RoverScout(string id, string name, string date, string section, string address)
-	: User::User(id, name, date, section, address)
+RoverScout::RoverScout(string id, string name, string section, string date, string address)
+	: User::User(id, name, section, date, address)
 {
 	this->setItemLimit();
 }
@@ -178,8 +178,8 @@ string Scouter::getInfo() const
 	return string(getUser() + '|' + this->rank + '\n');
 }
 
-Scouter::Scouter(string id, string name, string date, string section, string address, string rank)
-	: User::User(id, name, date, section, address)
+Scouter::Scouter(string id, string name, string section, string date, string address, string rank)
+	: User::User(id, name, section, date, address)
 {
 	this->rank = rank;
 	this->setItemLimit();

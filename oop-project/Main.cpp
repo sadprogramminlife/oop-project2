@@ -15,12 +15,17 @@ int main() {
 
 	LoanControl *l = static_cast<LoanControl*>(&i);
 
-	for (int i = 0; i < l->getAvailableLanterns().size(); i++)
-		cout << l->getAvailableLanterns()[i].getInfo();
+	for (int i = 0; i < l->getAvailableTents().size(); i++)
+		cout << l->getAvailableTents()[i].getInfo();
 
+	cout << endl;
 
-	auto items = l->getAvailableTents();
-	cout << l->performBorrowEquipment("T001", items) << endl;
+	for (int i = 0; i < l->getUserLoanRecords().size(); i++)
+		cout << l->getUserLoanRecords()[i].getLoanRecord();
+
+	
+	l->performReturnEquipment("T002", );
+
 
 	return 0;
 }

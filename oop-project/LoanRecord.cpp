@@ -1,13 +1,19 @@
 #include "LoanRecord.h"
 
-std::string LoanRecord::newDate(int day = 0)
+std::string LoanRecord::newDate(int days)
 {
-	// missing date
+	std::time_t t = std::time(0);
+	std::tm* now = std::localtime(&t);
 
-	return std::string();
+	std::stringstream ss;
+	ss << (now->tm_mday + days)
+		<< (now->tm_mon + 1)
+		<< (now->tm_year + 1900);
+
+	return ss.str();
 }
 
-LoanRecord::LoanRecord(std::string loanDate, std::string returnDate, std::string userId, std::string userName, std::string equipId, std::string equipName)
+LoanRecord::LoanRecord(std::string loanDate, std::string returnDate, std::string userId, std::string userName, std::string equipId, std::string equipName, std::string sstatus)
 {
 	this->loanDate = loanDate;
 	this->returnDate = returnDate;
@@ -16,14 +22,14 @@ LoanRecord::LoanRecord(std::string loanDate, std::string returnDate, std::string
 	this->userName = userName;
 	this->equipName = equipName;
 
-	this->status = false;		// out for loan
+	this->status = (!sstatus.compare("out for loan"))?0:1;
 }
 
 // connstructor for creating out for loan records
 LoanRecord::LoanRecord(std::string userId, std::string userName, std::string equipId, std::string equipName)
 {
-	this->loanDate = "";		// change this later
-	this->returnDate = "";			// change this later
+	this->loanDate = newDate();		// change this later
+	this->returnDate = newDate(14);			// change this later
 	this->userId = userId;
 	this->userName = userName;
 	this->equipId = equipId;
