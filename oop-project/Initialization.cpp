@@ -40,6 +40,10 @@ Initialization::Initialization(std::string username, std::string password, bool 
 	if (isAdmin ^ isUser) {
 		insertEquip();
 		insertRecord();
+
+		if (isUser) {
+			// prepare current borrow records for user
+		}
 	}
 }
 
@@ -150,12 +154,12 @@ void Initialization::insertRecord(std::string path)
 		{
 			getline(ss, loanDate, '|');
 			getline(ss, returnDate, '|');
-			getline(ss, equipId, '|');
 			getline(ss, userId, '|');
 			getline(ss, userName, '|');
+			getline(ss, equipId, '|');
 			getline(ss, equipName, '|');
 
-			this->records.push_back(LoanRecord(loanDate, returnDate, equipId, userId, userName, equipName));
+			this->records.push_back(LoanRecord(loanDate, returnDate, userId, userName, equipId, equipName));
 		}
 	}
 }

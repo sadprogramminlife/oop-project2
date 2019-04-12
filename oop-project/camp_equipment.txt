@@ -2,7 +2,7 @@ T001|25th Jam Tent|Nikko|tent|02042014|good|in|4|dome|2|true|blue
 
 T002|25th Jam Tent|Nikko|tent|02042014|good|in|4|dome|2|true|blue
 
-T003|25th Jam Tent|Nikko|tent|02042014|good|out|4|dome|2|true|blue
+T003|25th Jam Tent|Nikko|tent|02042014|good|in|4|dome|2|true|blue
 
 T004|Family Tent|LUXE|tent|12042008|damaged|in|4|wall|10|true|orange
 
@@ -25,9 +25,9 @@ S002|Camp Stove|MSR|stove|04042015|good|in|lightweight|stove gas
 S003|Camp Stove|MSR|stove|04042015|good|in|lightweight|gasoline
 S004|Camp Stove|MSR|stove|04042015|good|in|lightweight|gasoline
 
-S005|Handy Stove|SeaToSubmit|stove|02042016|being repaired|out|ultralight|screw headed gas
+S005|Handy Stove|SeaToSubmit|stove|02042016|being repaired|in|ultralight|screw headed gas
 
-S006|Handy Stove|SeaToSubmit|stove|02042016|good|out|ultralight|screw headed gas
+S006|Handy Stove|SeaToSubmit|stove|02042016|good|in|ultralight|screw headed gas
 
 S007|Alchohol Stove|Alocs|stove|01032017|good|out|ultralight|wax
 

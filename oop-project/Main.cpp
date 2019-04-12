@@ -20,9 +20,15 @@ int main() {
 
 
 	auto items = l->getAvailableTents();
-	cout <<l->performBorrowEquipment("T002", items);
-	cout << endl;
-	cout << l->performReturnEquipment("T002", items);
+	cout << l->performBorrowEquipment("T001", items) << endl;
+	cout << l->performBorrowEquipment("T002", items) << endl;
+	cout << l->performBorrowEquipment("T003", items) << endl;
+	cout << l->performBorrowEquipment("T004", items) << endl;
+	cout << l->performBorrowEquipment("T005", items) << endl;
+	cout << l->performBorrowEquipment("T006", items) << endl;
+	cout << l->performBorrowEquipment("T007", items) << endl;
+	cout << l->performBorrowEquipment("T008", items) << endl;
+	cout << l->performBorrowEquipment("T009", items) << endl;
 
 	return 0;
 }

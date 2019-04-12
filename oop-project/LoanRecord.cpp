@@ -7,7 +7,7 @@ std::string LoanRecord::newDate(int day = 0)
 	return std::string();
 }
 
-LoanRecord::LoanRecord(std::string loanDate, std::string returnDate, std::string equipId, std::string userId, std::string userName, std::string equipName)
+LoanRecord::LoanRecord(std::string loanDate, std::string returnDate, std::string userId, std::string userName, std::string equipId, std::string equipName)
 {
 	this->loanDate = loanDate;
 	this->returnDate = returnDate;
@@ -24,9 +24,9 @@ LoanRecord::LoanRecord(std::string userId, std::string userName, std::string equ
 {
 	this->loanDate = "";		// change this later
 	this->returnDate = "";			// change this later
-	this->equipId = equipId;
 	this->userId = userId;
 	this->userName = userName;
+	this->equipId = equipId;
 	this->equipName = equipName;
 
 	this->status = 0;

@@ -54,9 +54,20 @@ bool User::borrowItem(string itemId)
 {
 	bool flag = false;
 	if (borrownum < borrowlimit) {
-		itemList.push_back(itemId);
-		borrownum++;
-		flag = true;
+		bool dup = false;
+		for (int i = 0; i < itemList.size(); i++) {
+			if (!itemList[i].compare(itemId)) {
+				dup = true;
+
+				break;
+			}
+		}
+
+		if (!dup) {
+			itemList.push_back(itemId);
+			borrownum++;
+			flag = true;
+		}
 	}
 
 	return flag;
