@@ -42,7 +42,23 @@ Initialization::Initialization(std::string username, std::string password, bool 
 		insertRecord();
 
 		if (isUser) {
-			// prepare current borrow records for user
+			for (int i = 0; i < records.size(); i++) {
+				string match_uid = records[i].getUserId();
+
+				if (!match_uid.compare(getUser()->getId())) {
+					string match_eid = records[i].getEquipId();
+					bool isLoan = true;
+					for (int j = i + 1; isLoan && j < records.size(); j++) {
+						if (!records[j].getUserId().compare(match_uid))
+							if (!records[j].getEquipId().compare(match_uid))
+								if (!records[j].getStatus().compare("out for loan"))
+									isLoan = false;
+					}
+
+					if (isLoan)
+						getUser()->borrowItem(match_eid);
+				}
+			}
 		}
 	}
 }
