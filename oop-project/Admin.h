@@ -6,7 +6,8 @@
 
 class Admin : public Initialization
 {
-
+public:
+	bool updateEquipCcondition(string eid, string condition);
 };
 
 #endif
