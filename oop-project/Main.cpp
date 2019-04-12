@@ -23,8 +23,9 @@ int main() {
 	for (int i = 0; i < l->getUserLoanRecords().size(); i++)
 		cout << l->getUserLoanRecords()[i].getLoanRecord();
 
-	
-	l->performReturnEquipment("T002", );
+	// query for borrowing an equipment
+	vector<Tent> t = l->getTents();
+	l->performReturnEquipment("T002", t);
 
 
 	return 0;

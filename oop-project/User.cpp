@@ -91,6 +91,11 @@ bool User::canLoan()
 	return (borrowlimit-borrownum);
 }
 
+bool User::isAllow()
+{
+	return (!borrownum) ? true: false;
+}
+
 /*
 */
 

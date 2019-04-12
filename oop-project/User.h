@@ -32,6 +32,7 @@ public:
 	bool borrowItem(string itemId);
 	bool returnItem(string itemId);
 	bool canLoan();
+	bool isAllow();		// user's privilege for borrowing item again
 
 	User(string id, string name, string date, string section, string address);
 	virtual ~User();
