@@ -15,18 +15,21 @@ class Initialization
 private:
 	int index_of_user;
 
+protected:
+
 	std::vector<User*> users;
 	std::vector<Tent> tents;
 	std::vector<Stove> stoves;
 	std::vector<Lantern> lanterns;
 	std::vector<LoanRecord> records;
 
-protected:
-
 	void insertUser(std::string path = "user.txt");
 	void insertEquip(std::string path = "camp_equipment.txt");
 	void insertRecord(std::string path = "loan_record.txt");
 	void addRecord(const LoanRecord &r);
+
+	template <class T>
+	void addString(const string &s, vector<T> &t);
 
 public:
 
@@ -41,7 +44,11 @@ public:
 	std::vector<Lantern> getLanterns() const;
 	std::vector<LoanRecord> getLoanRecord() const; 
 
+	void updateEquipment();
+	void updateUser();
+
 };
 
 #endif
+
 

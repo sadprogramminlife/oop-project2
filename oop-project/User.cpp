@@ -45,7 +45,7 @@ string User::getUser() const
 	return string(this->id + '|' + this->name + '|' + this->date + '|' + this->section + '|' + this->address);
 }
 
-string User::getUserInfo() const
+string User::getInfo() const
 {
 	return string(getUser() + '\n');
 }
@@ -64,14 +64,13 @@ bool User::borrowItem(string itemId)
 
 bool User::returnItem(string itemId)
 {
-	if (0 != borrownum)
-		for (int i = 0; i < borrowlimit; i++) {
-			if (!itemList[i].compare(itemId)) {
-				itemList.erase(itemList.begin()+i);
-				borrownum--;
-				return true;
-			}
+	for (int i = 0; i < borrownum; i++) {
+		if (!itemList[i].compare(itemId)) {
+			itemList.erase(itemList.begin() + i);
+			borrownum--;
+			return true;
 		}
+	}
 
 	return false;
 }
@@ -100,7 +99,7 @@ string Scout::getRank()
 	return this->rank;
 }
 
-string Scout::getUserInfo() const
+string Scout::getInfo() const
 {
 	return string(getUser() + '|' + this->rank + '\n');
 }
@@ -120,7 +119,7 @@ void VentureScout::setItemLimit()
 	this->borrowlimit = 3;
 }
 
-string VentureScout::getUserInfo() const
+string VentureScout::getInfo() const
 {
 	return string(getUser() + '\n');
 }
@@ -139,7 +138,7 @@ void RoverScout::setItemLimit()
 	this->borrowlimit = 5;
 }
 
-string RoverScout::getUserInfo() const
+string RoverScout::getInfo() const
 {
 	return string(getUser() + '\n');
 }
@@ -163,7 +162,7 @@ string Scouter::getRank()
 	return this->rank;
 }
 
-string Scouter::getUserInfo() const
+string Scouter::getInfo() const
 {
 	return string(getUser() + '|' + this->rank + '\n');
 }

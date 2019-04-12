@@ -20,7 +20,7 @@ public:
 	string getCondition();
 	string getStatus();
 	string getEquipment();
-	virtual string getEquipmentInfo()=0;
+	virtual string getInfo()=0;
 
 	void setCondition(const string & condition);
 	void setStatus(const string & status);
@@ -46,7 +46,7 @@ public:
 	string getNumberfDoors();
 	string getIsDoubleLayer();
 	string getColour();
-	string getEquipmentInfo();
+	string getInfo();
 	Tent(string itemID, string itemName, string brand, string itemType, string dateOfPurchase, string  condition,
 		string status,string tentSize,string tentType,string numbrofDoors,string isDoubleLayer,string colour);
 	
@@ -61,7 +61,7 @@ private:
 public:
 	string getFuelType();
 	string getStoveType();
-	string getEquipmentInfo();
+	string getInfo();
 	Stove(string itemID, string itemName, string brand, string itemType, string dateOfPurchase, string  condition,
 		string status, string stoveType, string fuelType);
 };
@@ -75,7 +75,7 @@ public:
 	string getFuelType();
 	string getLanternType();
 	string getLanternSize();
-	string getEquipmentInfo();
+	string getInfo();
 
 	Lantern(string itemID, string itemName, string brand, string itemType, string dateOfPurchase, string  condition,
 		string status, string lanternType, string fuelType,string lanternSize);

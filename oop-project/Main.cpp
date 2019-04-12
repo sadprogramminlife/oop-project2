@@ -16,11 +16,13 @@ int main() {
 	LoanControl *l = static_cast<LoanControl*>(&i);
 
 	for (int i = 0; i < l->getAvailableLanterns().size(); i++)
-		cout << l->getAvailableLanterns()[i].getEquipmentInfo();
+		cout << l->getAvailableLanterns()[i].getInfo();
 
-	std::string str = "T001";
-	vector<Tent> items = l->getAvailableTents();
-	l->performBorrowEquipment(str, items);
+
+	auto items = l->getAvailableTents();
+	cout <<l->performBorrowEquipment("T002", items);
+	cout << endl;
+	cout << l->performReturnEquipment("T002", items);
 
 	return 0;
 }

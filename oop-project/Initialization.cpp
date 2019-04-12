@@ -202,5 +202,31 @@ std::vector<LoanRecord> Initialization::getLoanRecord() const
 	return this->records;
 }
 
+void Initialization::updateEquipment()
+{
+	string s = "";
+	for (int i = 0; i < tents.size(); i++) {
+		s += tents[i].getInfo();
+	}
+
+	for (int i = 0; i < stoves.size(); i++) {
+		s += stoves[i].getInfo();
+	}
+
+	for (int i = 0; i < lanterns.size(); i++) {
+		s += lanterns[i].getInfo();
+	}
+
+
+}
+
+template<class T>
+void Initialization::addString(const string & s, vector<T> &t)
+{
+	for (int i = 0; i < t.size(); i++) {
+		s += t[i].getInfo();
+	}
+}
+
 
 

@@ -27,7 +27,7 @@ public:
 	string getDob() const;
 	string getAddress() const;
 
-	virtual string getUserInfo() const = 0;
+	virtual string getInfo() const = 0;
 
 	bool borrowItem(string itemId);
 	bool returnItem(string itemId);
@@ -45,7 +45,7 @@ private:
 
 public:
 	string getRank();
-	string getUserInfo() const;
+	string getInfo() const;
 	
 	Scout(string id, string name, string date, string section, string address, string rank);
 };
@@ -56,7 +56,7 @@ private:
 	void setItemLimit();
 
 public:
-	string getUserInfo() const;
+	string getInfo() const;
 
 	VentureScout(string id, string name, string date, string section, string address);
 };
@@ -67,7 +67,7 @@ private:
 	void setItemLimit();
 
 public:
-	string getUserInfo() const;
+	string getInfo() const;
 
 	RoverScout(string id, string name, string date, string section, string address);
 };
@@ -80,7 +80,7 @@ private:
 	
 public:
 	string getRank();
-	string getUserInfo() const;
+	string getInfo() const;
 
 	Scouter(string id, string name, string date, string section, string address, string rank);
 };

@@ -49,7 +49,7 @@ string Stove::getStoveType()
 	return this->stoveType;
 }
 
-string Stove::getEquipmentInfo()
+string Stove::getInfo()
 {
 	return getEquipment() + string("|" +this->fuelType + "|" + this->stoveType +"\n");
 }
@@ -77,7 +77,7 @@ string Lantern::getLanternSize()
 	return lanternSize;
 }
 
-string Lantern::getEquipmentInfo()
+string Lantern::getInfo()
 {
 	return getEquipment() + string("|" + this->fuelType + "|" + this->lanternType + "|" + this->lanternSize+"\n");
 }
@@ -115,7 +115,7 @@ string Tent::getColour()
 	return this->colour;
 }
 
-string Tent::getEquipmentInfo()
+string Tent::getInfo()
 {
 	return getEquipment()+string("|"+this->tentSize+"|"+this->tentType+"|"+this->numberOfDoors+"|"+this->isDoubleLayer+"|"+this->colour+"\n");
 }

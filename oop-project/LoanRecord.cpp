@@ -7,11 +7,20 @@ std::string LoanRecord::newDate(int day = 0)
 	return std::string();
 }
 
-LoanRecord::LoanRecord()
+LoanRecord::LoanRecord(std::string loanDate, std::string returnDate, std::string equipId, std::string userId, std::string userName, std::string equipName)
 {
+	this->loanDate = loanDate;
+	this->returnDate = returnDate;
+	this->equipId = equipId;
+	this->userId = userId;
+	this->userName = userName;
+	this->equipName = equipName;
+
+	this->status = false;		// out for loan
 }
 
-LoanRecord::LoanRecord(std::string equipId, std::string userId, std::string userName, std::string equipName)
+// connstructor for creating out for loan records
+LoanRecord::LoanRecord(std::string userId, std::string userName, std::string equipId, std::string equipName)
 {
 	this->loanDate = "";		// change this later
 	this->returnDate = "";			// change this later
@@ -19,6 +28,8 @@ LoanRecord::LoanRecord(std::string equipId, std::string userId, std::string user
 	this->userId = userId;
 	this->userName = userName;
 	this->equipName = equipName;
+
+	this->status = 0;
 }
 
 std::string LoanRecord::getLoanDate() const
@@ -63,7 +74,7 @@ bool LoanRecord::getBoolStatus() const
 
 std::string LoanRecord::getLoanRecord() const
 {
-	return std::string(this->loanDate + '|' + this->returnDate + '|' + this->userId + '|' + this->userName + '|' + this->equipId + '|' + this->equipName + '\n');
+	return std::string(this->loanDate + '|' + this->returnDate + '|' + this->userId + '|' + this->userName + '|' + this->equipId + '|' + this->equipName + '|' + this->getStatus() + '\n');
 }
 
 LoanRecord LoanRecord::returnEquipment() const

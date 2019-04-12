@@ -71,6 +71,12 @@ bool LoanControl::performBorrowEquipment(string equipId, vector<Tent> &equipment
 		for (int i = 0; i < equipment.size(); i++) {
 			if (!equipment[i].getItemID().compare(equipId)) {
 				if (this->getUser()->borrowItem(equipId)) {
+					equipment[i].setStatus("out");
+
+					updateEquipment();
+					addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(), 
+						equipment[i].getItemID(), equipment[i].getItemName()));
+
 					flag = true;
 				}
 				else {
@@ -90,6 +96,12 @@ bool LoanControl::performBorrowEquipment(string equipId, vector<Stove> &equipmen
 		for (int i = 0; i < equipment.size(); i++) {
 			if (!equipment[i].getItemID().compare(equipId)) {
 				if (this->getUser()->borrowItem(equipId)) {
+					equipment[i].setStatus("out");
+
+					updateEquipment();
+					addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(),
+						equipment[i].getItemID(), equipment[i].getItemName()));
+
 					flag = true;
 				}
 				else {
@@ -109,6 +121,12 @@ bool LoanControl::performBorrowEquipment(string equipId, vector<Lantern> &equipm
 		for (int i = 0; i < equipment.size(); i++) {
 			if (!equipment[i].getItemID().compare(equipId)) {
 				if (this->getUser()->borrowItem(equipId)) {
+					equipment[i].setStatus("out");
+
+					updateEquipment();
+					addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(),
+						equipment[i].getItemID(), equipment[i].getItemName()));
+
 					flag = true;
 				}
 				else {
@@ -125,11 +143,26 @@ bool LoanControl::performReturnEquipment(string equipId, vector<Tent>& equipment
 {
 	bool flag = false;
 	for (int i = 0; !flag && i < equipment.size(); i++) {
-		if (equipId.compare(equipment[i].getItemID())) {
-			User *user = this->getUser();
-			if (this->getUser()->returnItem(equipId)) {
-				addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(), equipment[i].getItemID(), equipment[i].getItemName()));
-				flag = true;
+		if (!equipId.compare(equipment[i].getItemID())) {
+			User *user = getUser();
+			if (user->returnItem(equipId)) {
+				int j;
+				bool s = 1;
+				for (j = 0; j < records.size(); j++) {
+					if (!records[j].getUserId().compare(user->getId()) && !records[j].getEquipId().compare(equipId)) {
+						s = records[j].getBoolStatus();		// 0 for out for loean and 1 for returned
+
+						break;
+					}
+				}
+
+				if (!s) {
+					equipment[j].setStatus("in");
+					addRecord(records[j].returnEquipment());
+					updateEquipment();
+
+					flag = true;
+				}
 			}
 		}
 	}
@@ -140,11 +173,26 @@ bool LoanControl::performReturnEquipment(string equipId, vector<Stove>& equipmen
 {
 	bool flag = false;
 	for (int i = 0; !flag && i < equipment.size(); i++) {
-		if (equipId.compare(equipment[i].getItemID())) {
-			User *user = this->getUser();
-			if (this->getUser()->returnItem(equipId)) {
-				addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(), equipment[i].getItemID(), equipment[i].getItemName()));
-				flag = true;
+		if (!equipId.compare(equipment[i].getItemID())) {
+			User *user = getUser();
+			if (user->returnItem(equipId)) {
+				int j;
+				bool s = 1;
+				for (j = 0; j < records.size(); j++) {
+					if (!records[j].getUserId().compare(user->getId()) && !records[j].getEquipId().compare(equipId)) {
+						s = records[j].getBoolStatus();		// 0 for out for loean and 1 for returned
+
+						break;
+					}
+				}
+
+				if (!s) {
+					equipment[j].setStatus("in");
+					addRecord(records[j].returnEquipment());
+					updateEquipment();
+
+					flag = true;
+				}
 			}
 		}
 	}
@@ -155,11 +203,26 @@ bool LoanControl::performReturnEquipment(string equipId, vector<Lantern>& equipm
 {
 	bool flag = false;
 	for (int i = 0; !flag && i < equipment.size(); i++) {
-		if (equipId.compare(equipment[i].getItemID())) {
-			User *user = this->getUser();
-			if (this->getUser()->returnItem(equipId)) {
-				addRecord(LoanRecord(this->getUser()->getId(), this->getUser()->getName(), equipment[i].getItemID(), equipment[i].getItemName()));
-				flag = true;
+		if (!equipId.compare(equipment[i].getItemID())) {
+			User *user = getUser();
+			if (user->returnItem(equipId)) {
+				int j;
+				bool s = 1;
+				for (j = 0; j < records.size(); j++) {
+					if (!records[j].getUserId().compare(user->getId()) && !records[j].getEquipId().compare(equipId)) {
+						s = records[j].getBoolStatus();		// 0 for out for loean and 1 for returned
+
+						break;
+					}
+				}
+
+				if (!s) {
+					equipment[j].setStatus("in");
+					addRecord(records[j].returnEquipment());
+					updateEquipment();
+
+					flag = true;
+				}
 			}
 		}
 	}
