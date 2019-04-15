@@ -1,3 +1,6 @@
-||SCM002|Alex Wong|T001|25th Jam Tent|out for loan
-||SCM002|Alex Wong|T002|25th Jam Tent|out for loan
-||SCM002|Alex Wong|T001|25th Jam Tent|returned
+1342019|2742019|VEN001|CHAN Yik Ming|T001|25th Jam Tent|out for loan
+1342019|2742019|VEN001|CHAN Yik Ming|T002|25th Jam Tent|out for loan
+1342019|2742019|VEN001|CHAN Yik Ming|T005|4 Persons Dome|out for loan
+1342019|2742019|VEN001|CHAN Yik Ming|T001|25th Jam Tent|returned
+1342019|2742019|VEN001|CHAN Yik Ming|T002|25th Jam Tent|returned
+1342019|2742019|VEN001|CHAN Yik Ming|T005|4 Persons Dome|returned

@@ -8,7 +8,7 @@ bool Admin::updateEquipCcondition(string eid, string condition)
 	if (flag) {
 		if (eid[0] == 'T') {
 			for (int i = 0; i < tents.size(); i++) {
-				if (eid.compare(tents[i].getItemID())) {
+				if (!eid.compare(tents[i].getItemID())) {
 					tents[i].setCondition(condition);
 
 					break;
@@ -17,7 +17,7 @@ bool Admin::updateEquipCcondition(string eid, string condition)
 		}
 		else if (eid[1] == 'S') {
 			for (int i = 0; i < stoves.size(); i++) {
-				if (eid.compare(stoves[i].getItemID())) {
+				if (!eid.compare(stoves[i].getItemID())) {
 					stoves[i].setCondition(condition);
 
 					break;
@@ -27,7 +27,7 @@ bool Admin::updateEquipCcondition(string eid, string condition)
 		}
 		else if (eid[1] == 'L') {
 			for (int i = 0; i < lanterns.size(); i++) {
-				if (eid.compare(lanterns[i].getItemID())) {
+				if (!eid.compare(lanterns[i].getItemID())) {
 					lanterns[i].setCondition(condition);
 
 					break;

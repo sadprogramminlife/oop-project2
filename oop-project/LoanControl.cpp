@@ -161,7 +161,7 @@ bool LoanControl::performReturnEquipment(string equipId, vector<Tent>& equipment
 				}
 
 				if (!s) {
-					equipment[j].setStatus("in");
+					tents[j].setStatus("in");
 					addRecord(records[j].returnEquipment());
 					updateEquipment();
 
@@ -191,7 +191,7 @@ bool LoanControl::performReturnEquipment(string equipId, vector<Stove>& equipmen
 				}
 
 				if (!s) {
-					equipment[j].setStatus("in");
+					stoves[j].setStatus("in");
 					addRecord(records[j].returnEquipment());
 					updateEquipment();
 
@@ -221,7 +221,7 @@ bool LoanControl::performReturnEquipment(string equipId, vector<Lantern>& equipm
 				}
 
 				if (!s) {
-					equipment[j].setStatus("in");
+					lanterns[j].setStatus("in");
 					addRecord(records[j].returnEquipment());
 					updateEquipment();
 

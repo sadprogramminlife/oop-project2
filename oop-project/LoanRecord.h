@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#pragma warning(disable: 4996)
 
 class LoanRecord 
 {
